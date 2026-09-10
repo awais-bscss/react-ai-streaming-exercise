@@ -1,0 +1,422 @@
+:root {
+  --gpt-bg: #212121;
+  --gpt-surface: #2f2f2f;
+  --gpt-surface-hover: #383838;
+  --gpt-input-bg: #2f2f2f;
+  --gpt-code-bg: #171717;
+  
+  --gpt-text-primary: #ececec;
+  --gpt-text-secondary: #b4b4b4;
+  --gpt-text-muted: #737373;
+  
+  --gpt-border: rgba(255, 255, 255, 0.1);
+  --gpt-border-subtle: rgba(255, 255, 255, 0.06);
+  
+  --user-bubble-bg: #22374e;
+  --user-bubble-text: #ffffff;
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --content-max-width: 768px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--gpt-bg);
+  color: var(--gpt-text-primary);
+  height: 100vh;
+  overflow: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gpt-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--gpt-bg);
+}
+
+/* Centered hero */
+.gpt-hero-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.gpt-hero-content {
+  width: 100%;
+  max-width: var(--content-max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  margin-top: -50px;
+}
+
+.gpt-hero-title {
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.gpt-input-pill-wrapper {
+  width: 100%;
+}
+
+/* Input pill */
+.gpt-input-pill {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--gpt-input-bg);
+  border: 1px solid var(--gpt-border);
+  border-radius: 28px;
+  padding: 8px 12px 8px 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.gpt-input-pill:focus-within {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.gpt-plus-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--gpt-text-muted);
+  cursor: pointer;
+  transition: 0.15s ease;
+  flex-shrink: 0;
+  margin-right: 6px;
+}
+
+.gpt-plus-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.gpt-plus-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.gpt-hero-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--gpt-text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: none;
+  min-height: 24px;
+  max-height: 160px;
+}
+
+.gpt-hero-textarea::placeholder {
+  color: var(--gpt-text-muted);
+}
+
+.gpt-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: not-allowed;
+  transition: 0.15s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.gpt-send-btn.active {
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+}
+
+.gpt-send-btn.active:hover {
+  background-color: #e5e5e5;
+  transform: scale(1.05);
+}
+
+.gpt-send-btn.stop-mode {
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+}
+
+.gpt-send-btn.stop-mode:hover {
+  background-color: #fca5a5;
+}
+
+/* Prompt suggestions */
+.gpt-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: var(--gpt-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.suggestion-item:hover {
+  background: var(--gpt-surface);
+  color: var(--gpt-text-primary);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.suggestion-icon {
+  color: var(--gpt-text-muted);
+  flex-shrink: 0;
+}
+
+/* Chat area */
+.gpt-chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.gpt-scroll-area {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.gpt-message-inner {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 24px 20px 140px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* User bubble */
+.gpt-user-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.gpt-user-bubble {
+  max-width: 75%;
+  background: var(--user-bubble-bg);
+  color: var(--user-bubble-text);
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Assistant message */
+.gpt-assistant-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.gpt-assistant-content {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gpt-text-primary);
+}
+
+/* Plain text response — preserves line breaks */
+.gpt-response-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #d4d4d4;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Cursor */
+.gpt-caret {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: #ffffff;
+  vertical-align: -2px;
+  margin-left: 4px;
+  animation: cursor-blink 0.8s infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.gpt-stopped-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 6px 12px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 6px;
+  color: #fbbf24;
+  font-size: 0.8rem;
+}
+
+/* Actions */
+.gpt-response-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.gpt-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--gpt-border);
+  color: var(--gpt-text-secondary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.gpt-action-btn:hover:not(:disabled) {
+  background: var(--gpt-surface);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.gpt-action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.text-green {
+  color: #10a37f;
+}
+
+/* Bottom bar */
+.gpt-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, var(--gpt-bg) 30%);
+  padding: 12px 20px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.gpt-bottom-inner {
+  width: 100%;
+  max-width: var(--content-max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.gpt-stop-pill-container {
+  margin-bottom: 2px;
+}
+
+.gpt-stop-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gpt-surface);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: 0.15s ease;
+}
+
+.gpt-stop-pill:hover {
+  background: #3a3a3a;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fca5a5;
+}
+
+.gpt-disclaimer {
+  font-size: 0.72rem;
+  color: var(--gpt-text-muted);
+  text-align: center;
+}
