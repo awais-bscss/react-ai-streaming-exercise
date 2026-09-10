@@ -1,5 +1,7 @@
 # React AI Streaming UI
 
+**Live Demo:** [https://awais-bscss.github.io/react-ai-streaming-exercise/](https://awais-bscss.github.io/react-ai-streaming-exercise/)
+
 A ChatGPT-inspired real-time AI streaming simulator built with **React**, **Vite**, and browser-native **Web Streams API**. Demonstrates token-by-token incremental rendering, stream cancellation via `AbortController`, and React performance optimization with custom hooks.
 
 ---
