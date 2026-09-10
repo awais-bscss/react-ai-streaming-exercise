@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { RefreshCw, Copy, Check, PauseCircle } from 'lucide-react';
 
-export function ResponseView({
+export const ResponseView = React.memo(function ResponseView({
   streamedText,
   isStreaming,
   isStopped,
@@ -60,4 +60,4 @@ export function ResponseView({
       )}
     </div>
   );
-}
+});

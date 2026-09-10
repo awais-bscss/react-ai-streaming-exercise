@@ -23,10 +23,10 @@ export default function App() {
 
   const hasConversation = Boolean(activePromptText || streamedText || isStreaming || isStopped || isCompleted);
 
-  // Auto-scroll as tokens stream in
+  // Auto-scroll as tokens stream in (behavior: 'auto' prevents jitter from competing animation queues)
   useEffect(() => {
     if (hasConversation && chatBottomRef.current) {
-      chatBottomRef.current.scrollIntoView({ behavior: 'smooth' });
+      chatBottomRef.current.scrollIntoView({ behavior: 'auto' });
     }
   }, [streamedText, hasConversation]);
 

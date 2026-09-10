@@ -138,6 +138,7 @@ When aborted, `onAbort` in the service fires `clearTimeout(timeoutId)` to kill t
 | `useState` | `useAIStream`, `App`, `ResponseView` | Track UI-changing state (status, streamed text, input, copied) |
 | `useRef` | `useAIStream`, `App` | Hold `AbortController` and scroll anchor without triggering re-renders |
 | `useCallback` | `useAIStream`, `App`, `ChatInput` | Memoize stream functions and event handlers to prevent child components re-rendering on every 30ms token arrival |
+| `React.memo` | `ChatInput`, `ResponseView` | Skip child component re-renders when parent re-renders with unchanged props |
 | `useEffect` | `useAIStream`, `App` | Cleanup stream on unmount; auto-scroll on new token |
 
 ---

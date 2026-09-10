@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { SquarePen, ArrowUp, Square } from 'lucide-react';
 
-export function ChatInput({
+export const ChatInput = React.memo(function ChatInput({
   value,
   onChange,
   onStart,
@@ -66,4 +66,4 @@ export function ChatInput({
       )}
     </div>
   );
-}
+});

@@ -22,6 +22,7 @@ A pill-shaped input component matching the modern AI chat interface.
 ### Key Behaviors
 
 - **Keyboard Handling**: Pressing `Enter` without `Shift` triggers `onStart()`.
+- **Component Memoization**: Wrapped with `React.memo` to avoid re-renders while tokens stream into `App`.
 - **Dynamic Toggle Button**:
   - When `isStreaming` is `false`: Displays an upward arrow button to start generation.
   - When `isStreaming` is `true`: Switches to a stop button to cancel generation.
@@ -46,6 +47,7 @@ Renders streamed text tokens incrementally, including formatted markdown structu
 ### Key Behaviors
 
 - **Markdown & Code Parsing**: Splits incoming text into code blocks (` ``` `), headings (`###`, `####`), bullet points, bold text, and paragraphs on the fly.
+- **Component Memoization**: Wrapped with `React.memo` to avoid re-parsing markdown when user types in the prompt input.
 - **Blinking Caret**: Displays an inline animated cursor while `isStreaming` is active.
 - **Stopped Notice**: Renders a subtle notification when generation is stopped by the user.
 - **Conditional Actions**: The **Retry** and **Copy** buttons are hidden during streaming and only appear once the response completes or is stopped.
