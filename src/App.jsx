@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useAIStream } from './hooks/useAIStream';
 import { SAMPLE_PROMPTS } from './services/samplePrompts';
 import { ChatInput } from './components/ChatInput';
@@ -31,18 +31,18 @@ export default function App() {
   }, [streamedText, hasConversation]);
 
   // Start stream
-  const handleStart = (promptToRun) => {
+  const handleStart = useCallback((promptToRun) => {
     const text = promptToRun !== undefined ? promptToRun : inputText;
     if (!text || !text.trim() || isStreaming) return;
     startStream(text.trim());
     setInputText('');
-  };
+  }, [inputText, isStreaming, startStream]);
 
   // Reset to initial centered view
-  const handleNewChat = () => {
+  const handleNewChat = useCallback(() => {
     resetStream();
     setInputText('');
-  };
+  }, [resetStream]);
 
   return (
     <div className="gpt-app">
