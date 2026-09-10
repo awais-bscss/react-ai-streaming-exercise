@@ -23,7 +23,6 @@ export const ResponseView = React.memo(function ResponseView({
       <div className="gpt-assistant-content">
         <div className="gpt-response-text">
           <ReactMarkdown>{streamedText}</ReactMarkdown>
-          {isStreaming && <span className="gpt-caret" />}
         </div>
 
         {isStopped && (

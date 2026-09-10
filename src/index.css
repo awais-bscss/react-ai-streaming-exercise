@@ -361,22 +361,6 @@ body {
   font-size: 0.875rem;
 }
 
-/* Cursor */
-.gpt-caret {
-  display: inline-block;
-  width: 8px;
-  height: 16px;
-  background: #ffffff;
-  vertical-align: -2px;
-  margin-left: 4px;
-  animation: cursor-blink 0.8s infinite;
-}
-
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 .gpt-stopped-note {
   display: inline-flex;
   align-items: center;

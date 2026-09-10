@@ -48,6 +48,5 @@ Renders streamed text tokens incrementally, including formatted markdown structu
 
 - **Markdown & Code Parsing**: Splits incoming text into code blocks (` ``` `), headings (`###`, `####`), bullet points, bold text, and paragraphs on the fly.
 - **Component Memoization**: Wrapped with `React.memo` to avoid re-parsing markdown when user types in the prompt input.
-- **Blinking Caret**: Displays an inline animated cursor while `isStreaming` is active.
 - **Stopped Notice**: Renders a subtle notification when generation is stopped by the user.
 - **Conditional Actions**: The **Retry** and **Copy** buttons are hidden during streaming and only appear once the response completes or is stopped.
