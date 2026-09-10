@@ -289,14 +289,76 @@ body {
   color: var(--gpt-text-primary);
 }
 
-/* Plain text response — preserves line breaks */
+/* Markdown response container */
 .gpt-response-text {
-  white-space: pre-wrap;
   word-break: break-word;
   color: #d4d4d4;
   font-size: 1rem;
   line-height: 1.7;
   margin: 0;
+}
+
+.gpt-response-text p {
+  margin: 0 0 0.75rem 0;
+}
+
+.gpt-response-text p:last-child {
+  margin-bottom: 0;
+}
+
+.gpt-response-text h1,
+.gpt-response-text h2,
+.gpt-response-text h3,
+.gpt-response-text h4 {
+  color: #ffffff;
+  font-weight: 600;
+  margin: 1.1rem 0 0.4rem 0;
+  line-height: 1.4;
+}
+
+.gpt-response-text h1 { font-size: 1.2rem; }
+.gpt-response-text h2 { font-size: 1.1rem; }
+.gpt-response-text h3 { font-size: 1rem; }
+.gpt-response-text h4 { font-size: 0.95rem; }
+
+.gpt-response-text ol,
+.gpt-response-text ul {
+  margin: 0.4rem 0 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.gpt-response-text li {
+  margin-bottom: 0.3rem;
+}
+
+.gpt-response-text strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.gpt-response-text code {
+  background: #2a2a2a;
+  color: #e0c080;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.gpt-response-text pre {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  margin: 0.6rem 0;
+}
+
+.gpt-response-text pre code {
+  background: none;
+  padding: 0;
+  color: #d4d4d4;
+  font-size: 0.875rem;
 }
 
 /* Cursor */

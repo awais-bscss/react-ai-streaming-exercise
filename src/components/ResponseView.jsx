@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { RefreshCw, Copy, Check, PauseCircle } from 'lucide-react';
 
 export function ResponseView({
@@ -20,10 +21,10 @@ export function ResponseView({
   return (
     <div className="gpt-assistant-row">
       <div className="gpt-assistant-content">
-        <p className="gpt-response-text">
-          {streamedText}
+        <div className="gpt-response-text">
+          <ReactMarkdown>{streamedText}</ReactMarkdown>
           {isStreaming && <span className="gpt-caret" />}
-        </p>
+        </div>
 
         {isStopped && (
           <div className="gpt-stopped-note">
