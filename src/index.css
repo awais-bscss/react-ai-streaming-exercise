@@ -94,6 +94,7 @@ body {
 }
 
 /* Input pill */
+/* Input pill - Original slim centered pill */
 .gpt-input-pill {
   display: flex;
   align-items: center;
@@ -103,12 +104,18 @@ body {
   border-radius: 28px;
   padding: 8px 12px 8px 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, border-radius 0.2s;
 }
 
 .gpt-input-pill:focus-within {
   border-color: rgba(255, 255, 255, 0.28);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Multiline mode: only activates when user enters multi-line text */
+.gpt-input-pill.is-multiline {
+  align-items: flex-end;
+  border-radius: 24px;
 }
 
 .gpt-plus-btn {
@@ -125,6 +132,10 @@ body {
   transition: 0.15s ease;
   flex-shrink: 0;
   margin-right: 6px;
+}
+
+.gpt-input-pill.is-multiline .gpt-plus-btn {
+  margin-bottom: 2px;
 }
 
 .gpt-plus-btn:hover:not(:disabled) {
@@ -148,7 +159,21 @@ body {
   line-height: 1.5;
   resize: none;
   min-height: 24px;
-  max-height: 160px;
+  max-height: 200px;
+  field-sizing: content;
+}
+
+.gpt-hero-textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.gpt-hero-textarea::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+}
+
+.gpt-hero-textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .gpt-hero-textarea::placeholder {
@@ -169,6 +194,10 @@ body {
   transition: 0.15s ease;
   flex-shrink: 0;
   margin-left: 8px;
+}
+
+.gpt-input-pill.is-multiline .gpt-send-btn {
+  margin-bottom: 1px;
 }
 
 .gpt-send-btn.active {

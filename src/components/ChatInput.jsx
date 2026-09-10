@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useEffect, useState } from 'react';
 import { SquarePen, ArrowUp, Square } from 'lucide-react';
 
 export const ChatInput = React.memo(function ChatInput({
@@ -9,6 +9,32 @@ export const ChatInput = React.memo(function ChatInput({
   onNewChat,
   isStreaming,
 }) {
+  const textareaRef = useRef(null);
+  const [isMultiLine, setIsMultiLine] = useState(false);
+
+  // Auto-resize only when text exceeds a single line, keeping starting UI slim & centered
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    if (!value || !value.trim()) {
+      textarea.style.height = '';
+      setIsMultiLine(false);
+      return;
+    }
+
+    textarea.style.height = 'auto';
+    const scrollHeight = textarea.scrollHeight;
+
+    if (scrollHeight > 35) {
+      setIsMultiLine(true);
+      textarea.style.height = `${Math.min(scrollHeight, 200)}px`;
+    } else {
+      setIsMultiLine(false);
+      textarea.style.height = '';
+    }
+  }, [value]);
+
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -22,7 +48,7 @@ export const ChatInput = React.memo(function ChatInput({
   const handleChange = useCallback((e) => onChange(e.target.value), [onChange]);
 
   return (
-    <div className="gpt-input-pill">
+    <div className={`gpt-input-pill ${isMultiLine ? 'is-multiline' : ''}`}>
       <button
         type="button"
         className="gpt-plus-btn"
@@ -34,6 +60,7 @@ export const ChatInput = React.memo(function ChatInput({
       </button>
 
       <textarea
+        ref={textareaRef}
         className="gpt-hero-textarea"
         placeholder="Ask anything..."
         value={value}
