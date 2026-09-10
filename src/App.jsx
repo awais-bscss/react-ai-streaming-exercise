@@ -55,7 +55,7 @@ export default function App() {
               <ChatInput
                 value={inputText}
                 onChange={setInputText}
-                onStart={() => handleStart()}
+                onStart={handleStart}
                 onStop={stopStream}
                 onNewChat={handleNewChat}
                 isStreaming={isStreaming}
@@ -135,7 +135,7 @@ export default function App() {
               <ChatInput
                 value={inputText}
                 onChange={setInputText}
-                onStart={() => handleStart()}
+                onStart={handleStart}
                 onStop={stopStream}
                 onNewChat={handleNewChat}
                 isStreaming={isStreaming}

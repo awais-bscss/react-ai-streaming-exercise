@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { SquarePen, ArrowUp, Square } from 'lucide-react';
 
 export function ChatInput({
@@ -9,12 +9,17 @@ export function ChatInput({
   onNewChat,
   isStreaming,
 }) {
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      onStart();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        onStart();
+      }
+    },
+    [onStart]
+  );
+
+  const handleChange = useCallback((e) => onChange(e.target.value), [onChange]);
 
   return (
     <div className="gpt-input-pill">
@@ -32,7 +37,7 @@ export function ChatInput({
         className="gpt-hero-textarea"
         placeholder="Ask anything..."
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
         disabled={isStreaming}
         rows={1}
