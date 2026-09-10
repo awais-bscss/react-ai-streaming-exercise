@@ -8,11 +8,12 @@ A ChatGPT-inspired real-time AI streaming simulator built with **React**, **Vite
 
 In modern AI applications, model responses are transmitted as chunks over HTTP streams or Server-Sent Events (SSE). This project replicates that experience entirely on the client side using web standards:
 
-- **`ReadableStream`** — Ingests binary `Uint8Array` chunks from a stream source
-- **`TextEncoder` / `TextDecoder`** — Encodes text to binary on the mock server, decodes binary back to text on the client
-- **`AbortController`** — Provides immediate stream cancellation via `controller.abort()`
-- **State Lifecycle** — Manages transitions between `idle`, `streaming`, `stopped`, and `completed`
-- **Custom Hook** — All stream logic is encapsulated in `useAIStream` for clean separation of concerns
+- **`ReadableStream`** - Ingests binary `Uint8Array` chunks from a stream source
+- **`TextEncoder` / `TextDecoder`** - Encodes text to binary on the mock server, decodes binary back to text on the client
+- **`AbortController`** - Provides immediate stream cancellation via `controller.abort()`
+- **`react-markdown`** - Renders streamed text as formatted markdown (headings, lists, code blocks) in real time
+- **State Lifecycle** - Manages transitions between `idle`, `streaming`, `stopped`, and `completed`
+- **Custom Hook** - All stream logic is encapsulated in `useAIStream` for clean separation of concerns
 
 ---
 
@@ -117,7 +118,7 @@ abortControllerRef.current = controller;
 abortControllerRef.current.abort();
 ```
 
-When aborted, `onAbort` in the service fires `clearTimeout(timeoutId)` to kill the pending timer, then `controller.error()` to collapse the stream. The `catch` block in the hook sets `status = 'stopped'` and all partial text is preserved in state.
+When aborted, `onAbort` in the service fires `clearTimeout(timeoutId)` to kill the pending timer, then `controller.error()` to collapse the stream. The `catch` block differentiates between an expected `AbortError` (user clicked Stop) and unexpected errors (logged to console). All partial text is preserved in state.
 
 ### 5. State Lifecycle
 
@@ -136,7 +137,7 @@ When aborted, `onAbort` in the service fires `clearTimeout(timeoutId)` to kill t
 | :--- | :--- | :--- |
 | `useState` | `useAIStream`, `App`, `ResponseView` | Track UI-changing state (status, streamed text, input, copied) |
 | `useRef` | `useAIStream`, `App` | Hold `AbortController` and scroll anchor without triggering re-renders |
-| `useCallback` | `useAIStream` | Memoize functions to prevent child components re-rendering on every 30ms token arrival |
+| `useCallback` | `useAIStream`, `App` | Memoize stream functions and event handlers to prevent child components re-rendering on every 30ms token arrival |
 | `useEffect` | `useAIStream`, `App` | Cleanup stream on unmount; auto-scroll on new token |
 
 ---
