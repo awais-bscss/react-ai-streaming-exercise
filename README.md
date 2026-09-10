@@ -36,18 +36,30 @@ In modern AI applications, model responses are transmitted as chunks over HTTP s
 ## Project Structure
 
 ```
-src/
-├── App.jsx
-├── main.jsx
-├── index.css
-├── components/
-│   ├── ChatInput.jsx
-│   └── ResponseView.jsx
-├── hooks/
-│   └── useAIStream.js
-└── services/
-    ├── mockStreamService.js
-    └── samplePrompts.js
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── public/
+│   ├── favicon.svg
+│   └── icons.svg
+├── src/
+│   ├── components/
+│   │   ├── ChatInput.jsx
+│   │   ├── ResponseView.jsx
+│   │   └── README.md
+│   ├── hooks/
+│   │   ├── useAIStream.js
+│   │   └── README.md
+│   ├── services/
+│   │   ├── mockStreamService.js
+│   │   ├── samplePrompts.js
+│   │   └── README.md
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── index.html
+├── package.json
+└── vite.config.js
 ```
 
 ---
