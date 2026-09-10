@@ -50,9 +50,15 @@ export function useAIStream() {
       }
 
       setStatus('completed');
-    } catch {
-      // Catch abort error when user stops generation
-      setStatus('stopped');
+    } catch (err) {
+      if (err?.name === 'AbortError' || abortControllerRef.current?.signal?.aborted) {
+        // Expected - user clicked Stop
+        setStatus('stopped');
+      } else {
+        // Unexpected error - log it for debugging
+        console.error('Stream error:', err);
+        setStatus('stopped');
+      }
     } finally {
       if (abortControllerRef.current === controller) {
         abortControllerRef.current = null;
