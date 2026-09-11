@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useLayoutEffect, useCallback } from 'react';
 import { useAIStream } from './hooks/useAIStream';
 import { SAMPLE_PROMPTS } from './services/samplePrompts';
 import { ChatInput } from './components/ChatInput';
@@ -23,8 +23,8 @@ export default function App() {
 
   const hasConversation = Boolean(activePromptText || streamedText || isStreaming || isStopped || isCompleted);
 
-  // Auto-scroll as tokens stream in (behavior: 'auto' prevents jitter from competing animation queues)
-  useEffect(() => {
+  // Synchronously adjust scroll position before paint to eliminate sub-frame jitter
+  useLayoutEffect(() => {
     if (hasConversation && chatBottomRef.current) {
       chatBottomRef.current.scrollIntoView({ behavior: 'auto' });
     }
